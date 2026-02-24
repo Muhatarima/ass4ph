@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Job Application Tracker</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body { background: #f9fafb; }
+    
+    .job-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+      
+        .job-card:hover {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+    </style>
+    <body class="min-h-screen">
+        
+    
+    <div class="bg-white shadow-sm">
+  <div class="max-w-5xl mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold"><span style="color:#002C5C">Job Application Tracker</span></h1>
+
+    <div class="mt-5 flex justify-between max-w-5xl gap-10 sm:gap-16">
+      <div class="text-center">
+        <div class="text-sm text-gray-600 uppercase tracking-wide">Total</div>
+        <div class="text-3xl font-bold" id="total-count">0</div>
+      </div>
+      <div class="text-center">
+        <div class="text-sm text-green-600 uppercase tracking-wide">Interview</div>
+        <div class="text-3xl font-bold text-green-600" id="interview-count">0</div>
+      </div>
+      <div class="text-center">
+        <div class="text-sm text-red-600 uppercase tracking-wide">Rejected</div>
+        <div class="text-3xl font-bold text-red-600" id="rejected-count">0</div>
+      </div>
+    </div>
+  </div>
+</div>
+<main class="max-w-5xl mx-auto px-4 py-10">
+
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Available Jobs</h2>
+
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+      <div class="tabs tabs-boxed bg-white border rounded-lg overflow-hidden">
+        <button class="tab tab-active" data-tab="all">All</button>
+        <button class="tab" data-tab="interview">Interview</button>
+        <button class="tab" data-tab="rejected">Rejected</button>
+      </div>
+      <span class="text-sm font-medium text-gray-600" id="count-label">8 jobs</span>
+    </div>
+  </div>
+
+  <div id="jobs-list" class="space-y-6"></div>
+
+</main>
+</body>
+</html>
