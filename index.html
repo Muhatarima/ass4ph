@@ -26,7 +26,19 @@
     }
 
      .job-card:hover {
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 6px 16px rgba(17, 15, 15, 0.08);
+    }
+
+     .delete-icon:hover { color: #d83737; }
+    .status-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      background: #e5e7eb;
+      color: #414a55;
+      margin: 0.75rem 0 1rem 0;
     }
     .delete-icon {
       position: absolute;
@@ -35,8 +47,16 @@
       color: #9ca3af;
       cursor: pointer;
       font-size: 1.25rem;
+    } 
+      .badge-interview { background: #045c3e; color: white; }
+    .badge-rejected  { background: #cd3838; color: white; }
+    .metadata {
+      font-size: 0.98rem;
+      color: #4b5563;
+      margin: 0.5rem 0 0.78rem 0;
     }
-    
+    .tab-active { background-color: #3370d1 !important; color: white !important; }
+
     </style>
     <body class="min-h-screen">
         
@@ -79,5 +99,62 @@
   <div id="jobs-list" class="space-y-6"></div>
 
 </main>
+
+<!-- Step 1: HTML + Job Data -->
+<div id="jobs-list"></div>
+
+<div>
+ <span>Total Jobs: <span id="total-count">0</span></span>
+ <span>Interview: <span id="interview-count">0</span></span>
+ <span>Rejected: <span id="rejected-count">0</span></span>
+ <span id="count-label"></span>
+</div>
+
+<div>
+ <button class="tab" data-tab="all">All</button>
+ <button class="tab" data-tab="interview">Interview</button>
+ <button class="tab" data-tab="rejected">Rejected</button>
+</div>
+
+<!-- Step 1: HTML + Job Data -->
+<div id="jobs-list"></div>
+
+<div>
+ <span>Total Jobs: <span id="total-count">0</span></span>
+ <span>Interview: <span id="interview-count">0</span></span>
+ <span>Rejected: <span id="rejected-count">0</span></span>
+ <span id="count-label"></span>
+</div>
+
+<div>
+ <button class="tab" data-tab="all">All</button>
+ <button class="tab" data-tab="interview">Interview</button>
+ <button class="tab" data-tab="rejected">Rejected</button>
+</div>
+
+<!-- Step 1: HTML + Job Data -->
+<div id="jobs-list"></div>
+
+<div>
+ <span>Total Jobs: <span id="total-count">0</span></span>
+ <span>Interview: <span id="interview-count">0</span></span>
+ <span>Rejected: <span id="rejected-count">0</span></span>
+ <span id="count-label"></span>
+</div>
+
+<div>
+ <button class="tab" data-tab="all">All</button>
+ <button class="tab" data-tab="interview">Interview</button>
+ <button class="tab" data-tab="rejected">Rejected</button>
+</div>
+
+<script>
+
+const jobs = [
+ {id:1, company:"Mobile First Corp", position:"React Native Developer", status:"none"},
+ {id:2, company:"WebFlow Agency", position:"Web Designer & Developer", status:"none"},
+ {id:3, company:"DataViz Solutions", position:"Data Visualization Specialist", status:"none"}
+];
+</script>
 </body>
 </html>
