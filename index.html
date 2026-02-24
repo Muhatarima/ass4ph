@@ -100,111 +100,150 @@
 
 </main>
 
-<!-- Step 1: HTML + Job Data -->
-<div id="jobs-list"></div>
 
-<div>
- <span>Total Jobs: <span id="total-count">0</span></span>
- <span>Interview: <span id="interview-count">0</span></span>
- <span>Rejected: <span id="rejected-count">0</span></span>
- <span id="count-label"></span>
-</div>
 
-<div>
- <button class="tab" data-tab="all">All</button>
- <button class="tab" data-tab="interview">Interview</button>
- <button class="tab" data-tab="rejected">Rejected</button>
-</div>
 
-<!-- Step 1: HTML + Job Data -->
-<div id="jobs-list"></div>
 
-<div>
- <span>Total Jobs: <span id="total-count">0</span></span>
- <span>Interview: <span id="interview-count">0</span></span>
- <span>Rejected: <span id="rejected-count">0</span></span>
- <span id="count-label"></span>
-</div>
 
-<div>
- <button class="tab" data-tab="all">All</button>
- <button class="tab" data-tab="interview">Interview</button>
- <button class="tab" data-tab="rejected">Rejected</button>
-</div>
-
-<!-- Step 1: HTML + Job Data -->
-<div id="jobs-list"></div>
-
-<div>
- <span>Total Jobs: <span id="total-count">0</span></span>
- <span>Interview: <span id="interview-count">0</span></span>
- <span>Rejected: <span id="rejected-count">0</span></span>
- <span id="count-label"></span>
-</div>
-
-<div>
- <button class="tab" data-tab="all">All</button>
- <button class="tab" data-tab="interview">Interview</button>
- <button class="tab" data-tab="rejected">Rejected</button>
-</div>
 
 <script>
 
-const jobs = [
- {id:1, company:"Mobile First Corp", position:"React Native Developer", status:"none"},
- {id:2, company:"WebFlow Agency", position:"Web Designer & Developer", status:"none"},
- {id:3, company:"DataViz Solutions", position:"Data Visualization Specialist", status:"none"}
+const jobs =
+ [
+
+ {id:1, company:"Mobile First Corp", position:"React Native Developer", location:"Remote", type:"Full-time", salary:"$130,000 - $175,000", desc:"Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.", status:"none"},
+ {id:2, company:"WebFlow Agency", position:"Web Designer & Developer", location:"Los Angeles, CA", type:"Part-time", salary:"$80,000 - $120,000", desc:"Create stunning web experiences for high-profile clients. Must have portfolio and experience with modern web design trends.", status:"none"},
+ {id:3, company:"DataViz Solutions", position:"Data Visualization Specialist", location:"Boston, MA", type:"Full-time", salary:"$125,000 - $165,000", desc:"Transform complex data into compelling visualizations. Required skills: D3.js, React, and strong analytical thinking.", status:"none"},
+ {id:4, company:"CloudFirst Inc", position:"Backend Developer", location:"Seattle, WA", type:"Full-time", salary:"$140,000 - $190,000", desc:"Design and maintain scalable backend systems using Python and AWS. Work with modern DevOps practices and cloud infrastructure.", status:"none"},
+ {id:5, company:"Innovation Labs", position:"UI/UX Engineer", location:"Austin, TX", type:"Full-time", salary:"$150,000 - $180,000", desc:"Create beautiful and functional user interfaces for our suite of products. Strong design skills and frontend development expertise required.", status:"none"},
+ {id:6, company:"MegaCorp Solutions", position:"JavaScript Developer", location:"New York, NY", type:"Full-time", salary:"$130,000 - $170,000", desc:"Build enterprise applications with JavaScript and modern frameworks. We offer competitive compensation, health insurance, and professional development opportunities.", status:"none"},
+ {id:7, company:"StartupXYZ", position:"Full Stack Engineer", location:"Remote", type:"Full-time", salary:"$120,000 - $160,000", desc:"Join a fast-growing startup and work on our core platform. Experience with Node.js and React required. Great benefits and equity package included.", status:"none"},
+ {id:8, company:"TechCorp Industries", position:"Senior Frontend Developer", location:"San Francisco, CA", type:"Full-time", salary:"$130,000 - $175,000", desc:"Join an experienced Frontend team to build scalable web applications using React and TypeScript. You will work with a talented team on cutting-edge projects.", status:"none"}
 ];
-</script>
+         
+      const rejectedEl = document.getElementById("rejected-count");
 
-<script>
-const jobsList = document.getElementById("jobs-list");
+const jobsList   = document.getElementById("jobs-list");
+ const countLabel = document.getElementById("count-label");
 
-function renderJobs() {
- jobsList.innerHTML = ""; 
- jobs.forEach(job => {
-   const card = document.createElement("div");
-   card.className = "job-card";
-   card.dataset.id = job.id;
 
-   let badge = job.status==="interview"?"INTERVIEW": job.status==="rejected"?"REJECTED":"NOT APPLIED";
 
-   card.innerHTML = `
-    <h3>${job.company}</h3>
-    <p>${job.position}</p>
-    <p>Status: ${badge}</p>
-   `;
-   jobsList.appendChild(card);
- });
+
+
+const interviewEl= document.getElementById("interview-count");
+
+
+
+             const totalEl    = document.getElementById("total-count");
+
+function updateCounts() {
+ const ints = jobs.filter(j=>j.status==="interview").length;
+ const rejs = jobs.filter(j=>j.status==="rejected").length;
+
+ totalEl.textContent      = ints + rejs;
+
+
+
+
+  interviewEl.textContent  = ints;
+ rejectedEl.textContent   = rejs;
+
+ const active = document.querySelector(".tab-active")?.dataset.tab || "all";
+ let shown = jobs.length;
+ if(active==="interview") shown = ints;
+ if(active==="rejected")  shown = rejs;
+
+ countLabel.textContent   = `${shown} jobs`;
 }
 
-renderJobs();
-</script>
-
-<script>
-
-function renderJobs() {
+function render(tab="all") {
  jobsList.innerHTML = "";
- jobs.forEach(job => {
-   const card = document.createElement("div");
-   card.className = "job-card";
-   card.dataset.id = job.id;
 
-   let badge = job.status==="interview"?"INTERVIEW": job.status==="rejected"?"REJECTED":"NOT APPLIED";
+ let list = jobs;
+ if(tab==="interview") list = jobs.filter(j=>j.status==="interview");
+ if(tab==="rejected")  list = jobs.filter(j=>j.status==="rejected");
 
-   card.innerHTML = `
-    <h3>${job.company}</h3>
-    <p>${job.position}</p>
-    <p>Status: ${badge}</p>
-      <button class="interview-btn">INTERVIEW</button>
-    < button class="reject-btn">REJECTED</button>
-    <button
-     class="delete-btn"> DELETE </button>
-   `;
+ if(list.length===0 && tab!=="all") {
+  jobsList.innerHTML = `
+   <div class="text-center py-20 bg-white rounded-xl border shadow-sm">
+    <div class="text-7xl mb-6 text-blue-400">📄</div>
+    <h3 class="text-xl font-semibold text-gray-700">No jobs available</h3>
+    <p class="text-gray-500 mt-3">Check back soon for new job opportunities</p>
+   </div>`;
+  updateCounts();
+  return;
+ }
+
+ list.forEach(job=>{
+  const card = document.createElement("div");
+  card.className = "job-card";
+  card.dataset.id = job.id;
+
+  let badge = '<span class="status-badge">NOT APPLIED</span>';
+  if(job.status==="interview") badge = '<span class="status-badge badge-interview">INTERVIEW</span>';
+  if(job.status==="rejected")  badge = '<span class="status-badge badge-rejected">REJECTED</span>';
+
+  card.innerHTML = `
+   <div class="delete-icon delete-btn">🗑️</div>
+    <h3 class="text-xl font-bold text-gray-900">${job.company}</h3>
+        
+    <p class="text-lg font-medium text-gray-700 mt-1">${job.position}</p>
+
+
+   <div class="metadata">${job.location} • ${job.type} • ${job.salary}</div> 
+   
+   <div class="mt-2">${badge}</div>
+   <p class="mt-4 text-gray-600 leading-relaxed">${job.desc}</p>
+   <div class="mt-6 flex gap-3">
+    <button class="btn btn-sm btn-outline btn-success interview-btn ${job.status==='interview'?'btn-active':''}">INTERVIEW</button>
+    <button class="btn btn-sm btn-outline btn-error reject-btn ${job.status==='rejected'?'btn-active':''}">REJECTED</button>
+   </div>`;
+   
    jobsList.appendChild(card);
  });
+
+ updateCounts();
 }
-renderJobs();
+
+// ────────────────────────────────────────────── Events
+document.querySelectorAll(".tab").forEach(tab=>{
+ tab.addEventListener("click", ()=>{
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("tab-active"));
+  tab.classList.add("tab-active");
+  render(tab.dataset.tab);
+ });
+});
+
+jobsList.addEventListener("click", e=>{
+ const el = e.target.closest(".delete-btn, .interview-btn, .reject-btn");
+ if(!el) return;
+
+ const card = el.closest(".job-card");
+ if(!card) return;
+
+ const id = Number(card.dataset.id);
+ const job = jobs.find(j=>j.id===id);
+ if(!job) return;
+
+ if(el.classList.contains("interview-btn")) {
+  job.status = job.status==="interview"?"none":"interview";
+ } else if(el.classList.contains("reject-btn")) {
+  job.status = job.status==="rejected"?"none":"rejected";
+ } else if(el.classList.contains("delete-btn")) {
+  if(confirm("Remove this job forever?")) {
+   const index = jobs.indexOf(job);
+   if(index!==-1) jobs.splice(index,1);
+  } else { return; }
+ }
+
+ render(document.querySelector(".tab-active")?.dataset.tab || "all");
+});
+
+// ────────────────────────────────────────────── Init
+render("all");
 </script>
+
+
+
 </body>
 </html>
