@@ -156,5 +156,29 @@ const jobs = [
  {id:3, company:"DataViz Solutions", position:"Data Visualization Specialist", status:"none"}
 ];
 </script>
+
+<script>
+const jobsList = document.getElementById("jobs-list");
+
+function renderJobs() {
+ jobsList.innerHTML = ""; 
+ jobs.forEach(job => {
+   const card = document.createElement("div");
+   card.className = "job-card";
+   card.dataset.id = job.id;
+
+   let badge = job.status==="interview"?"INTERVIEW": job.status==="rejected"?"REJECTED":"NOT APPLIED";
+
+   card.innerHTML = `
+    <h3>${job.company}</h3>
+    <p>${job.position}</p>
+    <p>Status: ${badge}</p>
+   `;
+   jobsList.appendChild(card);
+ });
+}
+
+renderJobs();
+</script>
 </body>
 </html>
