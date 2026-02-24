@@ -129,7 +129,7 @@ const totalEl    = document.getElementById("total-count");
 
     const rejectedEl = document.getElementById("rejected-count");
 
- 
+ //let countLabel = "8 jobs"
  
  
  
@@ -142,24 +142,29 @@ const jobsList   = document.getElementById("jobs-list");
 
 function updateCounts() {
  const ints = jobs.filter(j=>j.status==="interview").length;
- const rejs = jobs.filter(j=>j.status==="rejected").length;
 
- totalEl.textContent      = ints + rejs;
+ const rejs = jobs.filter(j=>j.status==="rejected").length;
+     totalEl.textContent = jobs.length;
+
+
  interviewEl.textContent  = ints;
  rejectedEl.textContent   = rejs;
 
  const active = document.querySelector(".tab-active")?.dataset.tab || "all";
+
  let shown = jobs.length;
  if(active==="interview") shown = ints;
+
  if(active==="rejected")  shown = rejs;
 
- countLabel.textContent   = `${shown} jobs`;
+ countLabel.textContent   = `${shown} of 8 jobs`;
 }
 
 function render(tab="all") {
  jobsList.innerHTML = "";
 
  let list = jobs;
+
  if(tab==="interview") list = jobs.filter(j=>j.status==="interview");
  if(tab==="rejected")  list = jobs.filter(j=>j.status==="rejected");
 
