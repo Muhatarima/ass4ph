@@ -40,6 +40,9 @@
       color: #414a55;
       margin: 0.75rem 0 1rem 0;
     }
+
+
+
     .delete-icon {
       position: absolute;
       top: 1.25rem;
@@ -63,19 +66,20 @@
     
     <div class="bg-white shadow-sm">
   <div class="max-w-5xl mx-auto px-4 py-6">
+  
     <h1 class="text-3xl font-bold"><span style="color:#002C5C">Job Application Tracker</span></h1>
 
     <div class="mt-5 flex justify-between max-w-5xl gap-10 sm:gap-16">
       <div class="text-center">
-        <div class="text-sm text-gray-600 uppercase tracking-wide">Total</div>
-        <div class="text-3xl font-bold" id="total-count">0</div>
+               <div class="text-sm text-gray-600 uppercase tracking-wide">Total</div>
+        <div class="text-3xl font-bold" id="total-count">8</div>
       </div>
       <div class="text-center">
-        <div class="text-sm text-green-600 uppercase tracking-wide">Interview</div>
+         <div class="text-sm text-green-600 uppercase tracking-wide">Interview</div>
         <div class="text-3xl font-bold text-green-600" id="interview-count">0</div>
       </div>
       <div class="text-center">
-        <div class="text-sm text-red-600 uppercase tracking-wide">Rejected</div>
+          <div class="text-sm text-red-600 uppercase tracking-wide">Rejected</div>
         <div class="text-3xl font-bold text-red-600" id="rejected-count">0</div>
       </div>
     </div>
@@ -88,8 +92,9 @@
 
     <div class="flex  items-center justify-between gap-5 mb-6">
       <div class="tabs tabs-boxed bg-white border rounded-lg ">
+        
         <button class="tab tab-active" data-tab="all">All</button>
-        <button class="tab" data-tab="interview">Interview</button>
+              <button class="tab" data-tab="interview">Interview</button>
         <button class="tab" data-tab="rejected">Rejected</button>
       </div>
       <span class="text-sm font-medium text-gray-600" id="count-label">8 jobs</span>
@@ -105,47 +110,42 @@
 
 
 
-
 <script>
 
 const jobs =
  [
 
- {id:1, company:"Mobile First Corp",   position:"React Native Developer",  location:"Remote", type:"Full-time",  salary:"$130,000 - $175,000", desc:"Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.", status:"none"},
- {id:2, company:"WebFlow Agency", position:"Web Designer & Developer", location:"Los Angeles, CA", type:"Part-time", salary:"$80,000 - $120,000",    desc:"Create stunning web experiences for high-profile clients. Must have portfolio and experience with modern web design trends.", status:"none"},
+ {id:1, company:"Mobile First Corp",     position:"React Native Developer",  location:"Remote", type:"Full-time",  salary:"$130,000 - $175,000", desc:"Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.", status:"none"},
+ {id:2, company:"WebFlow Agency",           position:"Web Designer & Developer", location:"Los Angeles, CA", type:"Part-time", salary:"$80,000 - $120,000",    desc:"Create stunning web experiences for high-profile clients. Must have portfolio and experience with modern web design trends.", status:"none"},
  {id:3, company:"DataViz Solutions", position:"Data Visualization Specialist", location:"Boston, MA", type:"Full-time", salary:"$125,000 - $165,000", desc:"Transform complex data into compelling visualizations. Required skills: D3.js, React, and strong analytical thinking.", status:"none"},
- {id:4, company:"CloudFirst Inc", position:"Backend Developer",  location:"Seattle, WA",    type:"Full-time", salary:"$140,000 - $190,000",   desc:"Design and maintain scalable backend systems using Python and AWS. Work with modern DevOps practices and cloud infrastructure.", status:"none"},
+ {id:4, company:"CloudFirst Inc",  position:"Backend Developer",  location:"Seattle, WA",    type:"Full-time", salary:"$140,000 - $190,000",   desc:"Design and maintain scalable backend systems using Python and AWS. Work with modern DevOps practices and cloud infrastructure.", status:"none"},
  {id:5, company:"Innovation Labs", position:"UI/UX Engineer",       location:"Austin, TX", type:"Full-time", salary:"$150,000 - $180,000", desc:"Create beautiful and functional user interfaces for our suite of products. Strong design skills and frontend development expertise required.", status:"none"},
- {id:6, company:"MegaCorp Solutions", position:"JavaScript Developer", location:"New York, NY", type:"Full-time", salary:"$130,000 - $170,000", desc:"Build enterprise applications with JavaScript and modern frameworks. We offer competitive compensation, health insurance, and professional development opportunities.", status:"none"},
- {id:7, company:"StartupXYZ", position:"Full Stack Engineer",   location:"Remote", type:"Full-time", salary:"$120,000 - $160,000", desc:"Join a fast-growing startup and work on our core platform. Experience with Node.js and React required. Great benefits and equity package included.", status:"none"},
- {id:8, company:"TechCorp Industries", position:"Senior Frontend Developer",   location:"San Francisco, CA", type:"Full-time", salary:"$130,000 - $175,000", desc:"Join an experienced Frontend team to build scalable web applications using React and TypeScript. You will work with a talented team on cutting-edge projects.", status:"none"}
+ {id:6, company:"MegaCorp Solutions", position:  "JavaScript Developer", location:"New York, NY", type:"Full-time", salary:"$130,000 - $170,000", desc:"Build enterprise applications with JavaScript and modern frameworks. We offer competitive compensation, health insurance, and professional development opportunities.", status:"none"},
+ {id:7, company:"StartupXYZ" , position:"Full Stack Engineer",   location:"Remote", type:"Full-time", salary:"$120,000 - $160,000", desc:"Join a fast-growing startup and work on our core platform. Experience with Node.js and React required. Great benefits and equity package included.", status:"none"},
+ {id:8, company:"TechCorp Industries", position: "Senior Frontend Developer",   location: "San Francisco, CA", type:"Full-time", salary:"$130,000 - $175,000", desc:"Join an experienced Frontend team to build scalable web applications using React and TypeScript. You will work with a talented team on cutting-edge projects.", status:"none"}
 ];
+const totalEl    = document.getElementById("total-count");
          
-      const rejectedEl = document.getElementById("rejected-count");
 
-const jobsList   = document.getElementById("jobs-list");
- const countLabel = document.getElementById("count-label");
+    const rejectedEl = document.getElementById("rejected-count");
 
-
-
-
+ 
+ 
+ 
+ 
+ 
+    const countLabel = document.getElementById("count-label");
 
 const interviewEl= document.getElementById("interview-count");
 
-
-
-             const totalEl    = document.getElementById("total-count");
+const jobsList   = document.getElementById("jobs-list");
 
 function updateCounts() {
  const ints = jobs.filter(j=>j.status==="interview").length;
  const rejs = jobs.filter(j=>j.status==="rejected").length;
 
  totalEl.textContent      = ints + rejs;
-
-
-
-
-  interviewEl.textContent  = ints;
+ interviewEl.textContent  = ints;
  rejectedEl.textContent   = rejs;
 
  const active = document.querySelector(".tab-active")?.dataset.tab || "all";
@@ -163,47 +163,62 @@ function render(tab="all") {
  if(tab==="interview") list = jobs.filter(j=>j.status==="interview");
  if(tab==="rejected")  list = jobs.filter(j=>j.status==="rejected");
 
- if(list.length===0 && tab!=="all") {
-jobsList.innerHTML = `
-  <div class="text-center py-20 bg-white rounded-xl border shadow-sm">
-    <div class="mb-6">
-     
-        <img src="jobs.png" class="mx-auto h-24 w-24" alt="No jobs">
-                                         </div>
-    
-                                         <h3 class="text-xl font-semibold text-gray-700">No jobs available</h3>
-        <p class="text-gray-500 mt-3">Check back soon for new job opportunities</p>
-  </div>`;
+ if(list.length===0 && tab!=="all")
+  {
+               jobsList.innerHTML = `
+   <div class="text-center py-20 bg-white rounded-xl border shadow-sm">
+       <div class="mb-6">
+
+
+       <img src="jobs.png" class="mx-auto h-24 w-24" alt="No jobs">
+
+                   </div>
+     <h3 class="text-xl   font-semibold text-gray-700">  No jobs available</h3>
+     <p class="text-gray-500 mt-3"> Check back soon for new job opportunities
+        </p>
+
+   </div>`;
+
   updateCounts();
   return;
  }
 
  list.forEach(job=>{
   const card = document.createElement("div");
-  card.className = "job-card";
-  card.dataset.id = job.id;
+  
+  
+  card.className = `job-card bg-white p-4 rounded-xl border shadow-sm 
+    ${job.status==='interview' ? 'border-l-4 border-green-400' : job.status==='rejected' ? 'border-l-4 border-red-400' : ''}`;
+    
+       card.dataset.id = job.id;
 
-  let badge = '<span class="status-badge">NOT APPLIED</span>';
+  let badge =  '<span class="status-badge">NOT APPLIED</span>';
   if(job.status==="interview") badge = '<span class="status-badge badge-interview">INTERVIEW</span>';
+ 
   if(job.status==="rejected")  badge = '<span class="status-badge badge-rejected">REJECTED</span>';
 
-  card.innerHTML = `
-   <div class="delete-icon delete-btn">🗑️</div>
-    <h3 class="text-xl font-bold text-gray-900">${job.company}</h3>
-        
-    <p class="text-lg font-medium text-gray-700 mt-1">${job.position}</p>
+          card.innerHTML = `
+    <div class="delete-icon delete-btn">🗑️</div>
+
+                      <h3 class="text-xl font-bold text-gray-900">${job.company}</h3>
 
 
-   <div class="metadata">${job.location} • ${job.type} • ${job.salary}</div> 
+   <p class="text-lg font-medium text-gray-700 mt-1">${job.position}</p>
 
-   <div class="mt-2">${badge}</div>
+   <div class="metadata">${job.location} • ${job.type} • ${job.salary}</div>
+
+   <div class="mt-2">
+     ${badge}
+   </div>
+
    <p class="mt-4 text-gray-600 leading-relaxed">${job.desc}</p>
+
    <div class="mt-6 flex gap-3">
-    <button class="btn btn-sm btn-outline btn-success interview-btn ${job.status==='interview'?'btn-active':''}">INTERVIEW</button>
-    <button class="btn btn-sm btn-outline btn-error reject-btn ${job.status==='rejected'?'btn-active':''}">REJECTED</button>
+          <button class="btn btn-sm btn-outline btn-success interview-btn ${job.status==='interview'?'btn-active':''}">INTERVIEW</button>
+     <button class="btn btn-sm btn-outline btn-error reject-btn ${job.status==='rejected'?'btn-active':''}">REJECTED</button>
    </div>`;
-   
-   jobsList.appendChild(card);
+
+  jobsList.appendChild(card);
  });
 
  updateCounts();
@@ -219,24 +234,32 @@ document.querySelectorAll(".tab").forEach(tab=>{
 });
 
 jobsList.addEventListener("click", e=>{
- const el = e.target.closest(".delete-btn, .interview-btn, .reject-btn");
+    const el = e.target.closest(".delete-btn, .interview-btn, .reject-btn");
+
  if(!el) return;
 
  const card = el.closest(".job-card");
+
  if(!card) return;
 
  const id = Number(card.dataset.id);
  const job = jobs.find(j=>j.id===id);
+
  if(!job) return;
 
  if(el.classList.contains("interview-btn")) {
   job.status = job.status==="interview"?"none":"interview";
- } else if(el.classList.contains("reject-btn")) {
+
+
+ }          else if(el.classList.contains("reject-btn")) {
+
   job.status = job.status==="rejected"?"none":"rejected";
- } else if(el.classList.contains("delete-btn")) {
+
+ }  else if(el.classList.contains("delete-btn")) {
   if(confirm("Remove this job forever?")) {
-   const index = jobs.indexOf(job);
+     const index = jobs.indexOf(job);
    if(index!==-1) jobs.splice(index,1);
+
   } else { return; }
  }
 
@@ -244,6 +267,7 @@ jobsList.addEventListener("click", e=>{
 });
 
 render("all");
+
 </script>
 
 
